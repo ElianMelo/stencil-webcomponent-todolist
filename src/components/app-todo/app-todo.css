@@ -1,3 +1,8 @@
-:host {
-  display: block;
+ul {
+  margin-top: 2rem;
+}
+
+li {
+  list-style: none;
+  line-height: 2;
 }

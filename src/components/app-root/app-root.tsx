@@ -10,7 +10,7 @@ export class AppRoot {
     return (
       <div>
         <header>
-          <h1>Lista de tarefas com Stencil</h1>
+          <app-title title="Lista de tarefas com StencilJS"></app-title>
         </header>
 
         <main>

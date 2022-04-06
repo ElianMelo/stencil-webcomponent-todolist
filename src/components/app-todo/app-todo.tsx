@@ -1,4 +1,5 @@
 import { Component, h, State, Host } from '@stencil/core';
+import { TableComponent } from '../app-table/app-table';
 
 @Component({
   tag: 'app-todo',
@@ -7,36 +8,32 @@ import { Component, h, State, Host } from '@stencil/core';
 })
 export class TodoComponent {
 
-  @State() task: string = ''
   @State() tasks: string[] = []
 
-  handleSubmit = (ev: Event) => {
-    ev.preventDefault();
-    if (this.task.trim()) {
-      this.tasks.push(this.task);
-      this.task = '';
-    }
+  handleAdd = (ev: CustomEvent) => {
+    this.tasks = [
+      ...this.tasks,
+      ev.detail
+    ]
   }
 
-  handleInput = (ev: Event) => {
-    const field = ev.target as HTMLInputElement
-    this.task = field.value;
+  componentDidLoad() {
+    console.log("Carreguei")
+  }
 
+  componentDidUpdate() {
+    console.log("Atualizei")
   }
 
   render() {
     return (
       <Host>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            onInput={this.handleInput}
-            value={this.task}
-          ></input>
-          <button>Adicionar</button>
-        </form>
-        <ul>
-          {this.tasks.map((t, i) => <li key={i}>{t}</li>)}
-        </ul>
+        <app-form onAddTask={this.handleAdd}></app-form>
+        <TableComponent>
+          <ul>
+            {this.tasks.map((t, i) => <li key={i}>{t}</li>)}
+          </ul>
+        </TableComponent>
       </Host>
 
     );
